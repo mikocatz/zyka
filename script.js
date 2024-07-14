@@ -51,9 +51,9 @@ $(document).ready(function () {
       title: "Bash Install Geniacsc",
       date: "14 juni 2024",
       viewLink:
-        "/file/geniacs.bash.txt",
+        "/file/geniacs.sh.txt",
       downloadLink:
-      "/file/geniacs.bash", 
+      "/file/geniacs.sh", 
     },
   ];
 
