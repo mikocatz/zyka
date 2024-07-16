@@ -1,10 +1,18 @@
-echo "Memulai instalasi TR069 dengan GenieACS..."
+lokal_ip=$(hostname -I | awk '{print $1}')
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RESET='\033[0m'
 
-# Update dan instal paket yang diperlukan
-#echo "Mengatur repository dan menginstal paket wget, curl, dan openssh-sftp-server..."
-#apt update
-#apt install -y wget curl openssh-sftp-server
+echo -e "${YELLOW}Apakah Anda ingin melanjutkan instalasi GenieACS? (y/n): ${RESET}"
+read -p "> " konfirmasi
+if [[ ! "$konfirmasi" =~ ^[Yy]$ ]]; then
+    echo -e "${RED}Instalasi dibatalkan.${RESET}"
+    exit 1
+fi
 
+echo "Memulai instalasi GenieACS..."
 # Instal Node.js
 echo "Menginstal Node.js..."
 curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
@@ -129,12 +137,5 @@ systemctl start genieacs-fs
 systemctl enable genieacs-ui
 systemctl start genieacs-ui
 
-# Mengecek status layanan GenieACS
-echo "Memeriksa status layanan GenieACS..."
-systemctl status genieacs-cwmp
-systemctl status genieacs-nbi
-systemctl status genieacs-fs
-systemctl status genieacs-ui
-
-echo "Instalasi dan konfigurasi GenieACS selesai!"
-echo "Buka http://<IP-Anda>:3000 di browser untuk akses UI GenieACS."
+echo -e "${GREEN}Instalasi GenieACS selesai!${RESET}"
+echo -e "${BLUE}Buka http://$lokal_ip:3000 di browser untuk akses UI GenieACS.${RESET}"
