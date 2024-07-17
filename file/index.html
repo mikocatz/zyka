@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index of /</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #444;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f0f0f0;
+        text-align: left;
+      }
+
+      a.view-link {
+        color: #0066cc;
+        text-decoration: none;
+      }
+
+      a.view-link:hover {
+        text-decoration: underline;
+      }
+
+      a.download-link {
+        color: #ff5722;
+        text-decoration: none;
+      }
+
+      a.download-link:hover {
+        text-decoration: underline;
+      }
+
+      .date {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Index of /</h1>
+    <table id="file-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Last modified</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data file akan diisi melalui JavaScript -->
+      </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.getJSON("../item.json", function (items) {
+          // Render data ke dalam tabel
+          items.forEach((item) => {
+            $("#file-table tbody").append(`
+              <tr>
+                <td><a href="${item.viewLink}" class="view-link" target="_blank">${item.title}</a></td>
+                <td class="date">${item.date}</td>
+                <td><a href="${item.downloadLink}" class="download-link" target="_blank">Download</a></td>
+              </tr>
+            `);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
